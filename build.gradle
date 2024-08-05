@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.3.2'
 	id 'io.spring.dependency-management' version '1.1.6'
+	id 'org.springdoc.openapi-gradle-plugin' version '1.7.0'
 }
 
 group = 'enxec.example'
@@ -27,6 +28,17 @@ dependencies {
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4'
 }
 
+openApi {
+	outputDir = project.layout.buildDirectory.dir("generated-snippets").get().asFile
+	outputFileName = 'openapi.json'
+	apiDocsUrl = 'http://localhost:8080/v3/api-docs'
+	waitTimeInSeconds = 30
+}
+
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+tasks.named('forkedSpringBootRun') {
+	doNotTrackState("Cannot access input property 'workingDir'")
 }

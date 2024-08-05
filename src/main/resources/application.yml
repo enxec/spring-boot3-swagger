@@ -1,3 +1,8 @@
 spring:
   application:
     name: swagger
+
+# API 문서 생성 비활성화
+#springdoc:
+#  api-docs:
+#    enabled: false
